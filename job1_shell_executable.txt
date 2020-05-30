@@ -1,0 +1,7 @@
+if sudo mkdir /mlmodel
+then
+echo "directory created"
+else
+echo "already created"
+fi
+sudo cp -v -r -f * /mlmodel

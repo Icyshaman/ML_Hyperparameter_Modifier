@@ -1,0 +1,4 @@
+#!/bin/bash
+
+git push
+curl --user "<user_name>:<password>" <URL to trigger jenkins job remotely>

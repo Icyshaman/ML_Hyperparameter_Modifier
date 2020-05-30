@@ -1,0 +1,6 @@
+if sudo docker ps | grep cnnaccuracyidentifier
+then
+echo 'All OK'
+else
+sudo curl --user "<user_name>:<password>" <URL to trigger jenkins job 2>
+fi

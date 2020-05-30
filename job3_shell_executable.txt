@@ -1,0 +1,6 @@
+cd /mlmodel
+FILENAME=`sudo docker exec cnnaccuracyidentifier ls | grep .py`
+RESULT=`sudo docker exec cnnaccuracyidentifier python3 ${FILENAME} | grep Test\ accuracy: | grep -oP '(?<=accuracy:).*' | sed -e 's/^\s*//' -e '/^$/d'`
+sudo docker cp cnnaccuracyidentifier:/mlmodel/. /mlmodel/
+sudo chown -R jenkins: /mlmodel
+sudo echo ${RESULT} > accuracy.txt

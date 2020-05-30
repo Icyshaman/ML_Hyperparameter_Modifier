@@ -1,0 +1,2 @@
+cd /mlmodel
+sudo docker rm -f cnnaccuracyidentifier

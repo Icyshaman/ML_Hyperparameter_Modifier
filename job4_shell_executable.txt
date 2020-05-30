@@ -1,0 +1,23 @@
+cd /mlmodel
+CURRENTACC=`sudo cat accuracy.txt`
+FILENAME=`ls | grep .py`
+REQUIREDACC=0.9
+if (( $(echo "$CURRENTACC >= $REQUIREDACC" |bc -l) ));
+then
+sudo curl --user "<user_name>:<password>" <URL to trigger jenkins job5 remotely> 
+else
+EPOCH=`grep epochs\ = $FILENAME | head -1 | grep -oP '(?<=epochs\ =).*' | sed -e 's/^\s*//' -e /^$/d`
+EPOCH=$((EPOCH+2))
+STR1=`grep epochs\ = $FILENAME | head -1`
+STR2="epochs = $EPOCH"
+sed -i "s/$STR1/$STR2/g" $FILENAME
+LASTCONV=`grep Conv2D $FILENAME | tail -1`
+CONV2D=`echo $LASTCONV | grep -oP '(?<=Conv2D).*?(?=,)' | sed 's/(//g'`
+CONV2D=$((CONV2D*2))
+CONVLAYER="model.add(Conv2D($CONV2D, (3,3), activation='relu')"
+sed -i "/^$LASTCONV/a $CONVLAYER/g" $FILENAME
+PATTERN="model.add(Flatten())"
+DENSE="model.add(Dense(128, activation='relu'))"
+sed -i "/^$PATTERN/a $DENSE/g" $FILENAME 
+sudo curl --user "<user_name>:<password>" <URL to trigger jenkins job2 remotely>
+fi

@@ -1,0 +1,14 @@
+cd /mlmodel
+sudo systemctl start docker
+if cat `ls | grep .py` | grep keras
+then
+if sudo docker ps -a | grep cnnaccuracyidentifier
+then
+sudo docker start cnnaccuracyidentifier
+else
+sudo docker run -dit --name cnnaccuracyidentifier cnndocker:v1
+fi
+sudo docker cp /mlmodel/. cnnaccuracyidentifier:/mlmodel/
+else
+echo "We don't support this file right now."
+fi
