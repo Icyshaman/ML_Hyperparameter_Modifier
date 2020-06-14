@@ -9,6 +9,7 @@ else
 sudo docker run -dit --name cnnaccuracyidentifier cnndocker:v1
 fi
 sudo docker cp /mlmodel/. cnnaccuracyidentifier:/mlmodel/
+sudo curl --user "<user_name>:<password>" <URL to trigger jenkins job3 remotely>
 else
 echo "We don't support this file right now."
 fi
