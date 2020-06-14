@@ -38,7 +38,7 @@
   <br><br>
   ![](Images/6_mdjob2-2.jpg)
   <br><br>
-  **Job2 will analyze the code and check if the code is related to cnn and if it is then it will start the container, copy the downloaded repo inside the container and trigger job3 once successfully executed job2.**
+  **Job2 will analyze the code and check if the code is related to cnn and if it is then it will start the container, copy the downloaded repo inside the container and trigger job3.**
   ***
   
 * ### **Configure jenkins job3 : Train the model and predict the accuracy.**
